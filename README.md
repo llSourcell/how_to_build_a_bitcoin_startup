@@ -15,10 +15,10 @@ This is the code for [this](https://youtu.be/w81Z8JHARTk) video on Youtube by Si
 
 ## Usage
 
-# Install the dependencies using npm (replace npm with 'yarn' if npm doesn't work)
+#### Install the dependencies using npm (replace npm with 'yarn' if npm doesn't work)
 npm install
 
-# And start the development server
+#### And start the development server
 npm start
 
 ## TODOs - Make a PR if you fix any. 
