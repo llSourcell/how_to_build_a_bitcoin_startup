@@ -1,0 +1,342 @@
+
+<html>
+<body bgcolor="#c66e5e">
+</body>
+	</html>
+
+<script src="/dist/tesseract.dev.js"></script>
+<script>
+
+function progressUpdate(packet){
+	var log = document.getElementById('log');
+
+	if(log.firstChild && log.firstChild.status === packet.status){
+		if('progress' in packet){
+			var progress = log.firstChild.querySelector('progress')
+			progress.value = packet.progress
+		}
+	}else{
+		var line = document.createElement('div');
+		line.status = packet.status;
+		var status = document.createElement('div')
+		status.className = 'status'
+		status.appendChild(document.createTextNode(packet.status))
+		line.appendChild(status)
+
+		if('progress' in packet){
+			var progress = document.createElement('progress')
+			progress.value = packet.progress
+			progress.max = 1
+			line.appendChild(progress)
+		}
+
+
+		if(packet.status == 'done'){
+			var pre = document.createElement('pre')
+			pre.appendChild(document.createTextNode(packet.data.text))
+			line.innerHTML = ''
+			line.appendChild(pre)
+
+		}
+
+		log.insertBefore(line, log.firstChild)
+	}
+}
+
+function recognizeFile(file){
+	document.querySelector("#log").innerHTML = ''
+  const corePath = window.navigator.userAgent.indexOf("Edge") > -1
+    ? '../../node_modules/tesseract.js-core/tesseract-core.asm.js'
+    : '../../node_modules/tesseract.js-core/tesseract-core.wasm.js';
+
+  const { TesseractWorker } = Tesseract;
+
+  const worker = new TesseractWorker({
+    corePath,
+  });
+
+	worker.recognize(file,
+		document.querySelector('#langsel').value
+	)
+		.progress(function(packet){
+			console.info(packet)
+			progressUpdate(packet)
+
+		})
+		.then(function(data){
+			console.log(data)
+			progressUpdate({ status: 'done', data: data })
+		})
+}
+
+function submitted() {
+  alert("Submitted!");
+}
+
+</script>
+
+<head>
+  <link rel="stylesheet" href="login.css">
+</head>
+
+<div class="topnav">
+  <a class="active" href="#home">Home</a>
+<a href="#about"></a><a href="#about"></a><a href="#about"></a><a href="#about"></a><a href="#about"></a><a href="#about"></a><a href="#about"></a><a href="#about"></a><a href="#about"></a>
+    <a href="#about"></a>
+    <a href="#about"></a>
+    <a href="#about"></a>
+    <a href="#about"></a>
+    <a href="#about"></a>
+    <a href="#about"></a>
+        <a href="#about"></a>
+
+  <a href="/login">Dashboard</a>
+
+</div>
+<center></center>
+<br>
+<form action="javascript:;" onsubmit="showDiv(this)">
+      <input type="text" placeholder="Enter Patient Name" name="search">
+      <button type="submit">Search</button>
+    </form>
+
+<div id="record_found" style="display:none;">
+
+    <p>1 health record located<p>
+<table>
+  <tr>
+    <th>Patient Name</th>
+    <th>ID</th>
+    <th>Country</th>
+  </tr>
+  <tr onclick="window.location='#';">
+    <td>Siraj Raval</td>
+    <td>#98848288</td>
+    <td>USA</td>
+  </tr>
+</table>
+
+<!-- Trigger/Open The Modal -->
+<button id="myBtn">See Health Record</button>
+
+<div id="myModal" class="modal">
+
+  <!-- Modal content -->
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <p>Health Record Overview</p>
+      <iframe src="hFigures-master/simple.html" width="700" height="600" frameBorder="0"></iframe>
+
+  </div>
+</div>
+
+</div>
+
+  <script>
+
+  	function showDiv() {
+   document.getElementById('record_found').style.display = "block";
+}
+
+// Get the modal
+var modal = document.getElementById("myModal");
+
+// Get the button that opens the modal
+var btn = document.getElementById("myBtn");
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks the button, open the modal 
+btn.onclick = function() {
+  modal.style.display = "block";
+}
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+  modal.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
+</script>
+
+
+<br>
+<select id="langsel" onchange="window.lastFile && recognizeFile(window.lastFile)">
+<option value='afr'     > Afrikaans             </option>
+<option value='ara'     > Arabic                </option>
+<option value='aze'     > Azerbaijani           </option>
+<option value='bel'     > Belarusian            </option>
+<option value='ben'     > Bengali               </option>
+<option value='bul'     > Bulgarian             </option>
+<option value='cat'     > Catalan               </option>
+<option value='ces'     > Czech                 </option>
+<option value='chi_sim' > Chinese               </option>
+<option value='chi_tra' > Traditional Chinese   </option>
+<option value='chr'     > Cherokee              </option>
+<option value='dan'     > Danish                </option>
+<option value='deu'     > German                </option>
+<option value='ell'     > Greek                 </option>
+<option value='eng'     selected> English                </option>
+<option value='enm'     > English (Old)         </option>
+<option value='meme'     > Internet Meme                </option>
+<option value='epo'     > Esperanto             </option>
+<option value='epo_alt' > Esperanto alternative </option>
+<option value='equ'     > Math                  </option>
+<option value='est'     > Estonian              </option>
+<option value='eus'     > Basque                </option>
+<option value='fin'     > Finnish               </option>
+<option value='fra'     > French                </option>
+<option value='frk'     > Frankish              </option>
+<option value='frm'     > French (Old)          </option>
+<option value='glg'     > Galician              </option>
+<option value='grc'     > Ancient Greek         </option>
+<option value='heb'     > Hebrew                </option>
+<option value='hin'     > Hindi                 </option>
+<option value='hrv'     > Croatian              </option>
+<option value='hun'     > Hungarian             </option>
+<option value='ind'     > Indonesian            </option>
+<option value='isl'     > Icelandic             </option>
+<option value='ita'     > Italian               </option>
+<option value='ita_old' > Italian (Old)         </option>
+<option value='jpn'     > Japanese              </option>
+<option value='kan'     > Kannada               </option>
+<option value='kor'     > Korean                </option>
+<option value='lav'     > Latvian               </option>
+<option value='lit'     > Lithuanian            </option>
+<option value='mal'     > Malayalam             </option>
+<option value='mkd'     > Macedonian            </option>
+<option value='mlt'     > Maltese               </option>
+<option value='msa'     > Malay                 </option>
+<option value='nld'     > Dutch                 </option>
+<option value='nor'     > Norwegian             </option>
+<option value='pol'     > Polish                </option>
+<option value='por'     > Portuguese            </option>
+<option value='ron'     > Romanian              </option>
+<option value='rus'     > Russian               </option>
+<option value='slk'     > Slovakian             </option>
+<option value='slv'     > Slovenian             </option>
+<option value='spa'     > Spanish               </option>
+<option value='spa_old' > Old Spanish           </option>
+<option value='sqi'     > Albanian              </option>
+<option value='srp'     > Serbian (Latin)       </option>
+<option value='swa'     > Swahili               </option>
+<option value='swe'     > Swedish               </option>
+<option value='tam'     > Tamil                 </option>
+<option value='tel'     > Telugu                </option>
+<option value='tgl'     > Tagalog               </option>
+<option value='tha'     > Thai                  </option>
+<option value='tur'     > Turkish               </option>
+<option value='ukr'     > Ukrainian             </option>
+<option value='vie'     > Vietnamese            </option>
+</select>
+
+<button onclick="recognizeFile('../../tests/assets/images/simple.png')">Sample Image</button>
+<input type="file" onchange="recognizeFile(window.lastFile=this.files[0])">
+
+<div id="log"></div>
+
+</center>
+<center>
+<div class="btn-group" id=yo>
+  <button onclick="submitted()">Submit Health Record</button>
+</div>
+</body>
+
+<style>
+     
+	body {font-family: Arial, Helvetica, sans-serif;}
+
+/* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+  background-color: #fefefe;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+}
+
+/* The Close Button */
+.close {
+  color: #aaaaaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+	table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+#log > div {
+    color: #313131;
+    border-top: 1px solid #dadada;
+    padding: 9px;
+    display: flex;
+}
+#log > div:first-child {
+    border: 0;
+}
+
+
+.status {
+	min-width: 250px;
+}
+#log {
+    border: 1px solid #dadada;
+    padding: 10px;
+    margin-top: 20px;
+    min-height: 100px;
+}
+body {
+    font-family: sans-serif;
+    margin: 30px;
+}
+
+progress {
+    display: block;
+    width: 100%;
+    transition: opacity 0.5s linear;
+}
+progress[value="1"] {
+    opacity: 0.5;
+}
+</style>

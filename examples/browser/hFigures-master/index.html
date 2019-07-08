@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="utf-8">
+    <title></title>
+    <style type="text/css">
+        body {
+            font-family: sans-serif;
+        }
+        svg {
+            margin-left: auto;
+            margin-right: auto;
+            display: inline-block;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            -khtml-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+
+            cursor: default;
+        }
+        div.hGraph-container {
+            margin: 0;
+            padding: 0;
+            height: 98.45%;
+            width: 99.45%;
+            display: inline-block;
+            position: absolute;
+            vertical-align: middle;
+
+        }
+		div.examples {
+			position: absolute;
+			font-size: 0.9em;
+			left: 1em;
+			bottom: 2em;
+			color: grey;
+		}
+    </style>
+</head>
+<body>
+
+<div class="hGraph-container"></div>
+
+<script charset="utf-8" src="d3.js"></script>
+<script charset="utf-8" src="dataPatientDiabetes.js"></script>
+
+<script src="hFigures.js" type="application/javascript"></script>
+
+<script type="text/javascript">
+    var w = 1600;
+    var className = "hGraph-container";
+    var hFigureInstance = HealthFigure(groups, w, className, {
+        minScale: 0.45
+    }); // from data.js
+    var additionalFigure = hFigureInstance.plotAt(0);
+
+    function keyDownTextField(e) {
+
+        var keyCode = e.keyCode;
+
+        switch (keyCode){
+
+            case 37:
+                // left arrow
+                hFigureInstance.update(0);
+                break;
+
+            case 39:
+                // right arrow
+                console.log("next ts : " + hFigureInstance.next());
+                hFigureInstance.update(1423742720);
+                break;
+
+            case 65:
+                // 'a' letter
+                additionalFigure.update(0);
+                break;
+            case 68:
+                // 'd' letter
+                additionalFigure.update(1423742720);
+                break;
+        }
+    }
+    document.addEventListener("keydown", keyDownTextField, false);
+
+
+</script>
+
+<div class="examples">
+    Some other examples:
+    <list>
+        <li>
+            <a href="simple.html">A simple dataset</a>
+        </li>
+        <li>
+            <a href="complex.html">A more complex dataset</a>
+        </li>
+        <li>
+            <a href="nutrition.html">A nutrition-centric dataset</a>
+        </li>
+    </list>
+</div>
+
+</body>
+</html>

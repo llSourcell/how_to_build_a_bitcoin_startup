@@ -1,0 +1,112 @@
+<html>
+
+<head>
+  <link rel="stylesheet" href="login.css">
+</head>
+
+<body background-color="#c66e5e">
+<div class="topnav">
+  <a class="active" href="/">Home</a>
+<a href="#about"></a><a href="#about"></a><a href="#about"></a><a href="#about"></a><a href="#about"></a><a href="#about"></a><a href="#about"></a><a href="#about"></a><a href="#about"></a>
+    <a href="#about"></a>
+    <a href="#about"></a>
+    <a href="#about"></a>
+    <a href="#about"></a>
+    <a href="#about"></a>
+    <a href="#about"></a>
+    <a href="/Login">Login</a>
+  <a href="/Signup">Signup</a>
+
+</div>
+<center>
+<br>
+<br><br><br><br><br><br>
+<h1><font color="white">Are you a Patient or Provider?</font></h1>
+
+</center>
+<center>
+<div class="btn-group" id=yo>
+
+  <button onclick="location.href='http://localhost:3000/patient_signup'">Patient</button>
+  <button onclick="location.href='http://localhost:3000/provider_signup'">Provider</button>
+</div>
+
+</center>
+
+<style>
+
+	body {
+		background-color: #C66E5E;
+	}
+body {font-family: Arial, Helvetica, sans-serif;}
+
+
+#yo {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+	/* Add a black background color to the top navigation */
+.topnav {
+	width: 100%;
+  background-color: #333;
+  overflow: hidden;
+  margin: 0 0 1em 0;
+	padding: 0;
+}
+
+/* Style the links inside the navigation bar */
+.topnav a {
+  float: left;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+.btn-group {
+	float: center;
+}
+
+/* Change the color of links on hover */
+.topnav a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+/* Add a color to the active/current link */
+.topnav a.active {
+  background-color: #4CAF50;
+  color: white;
+}
+
+.btn-group button {
+  background-color: #4CAF50; /* Green background */
+  border: 1px solid green; /* Green border */
+  color: white; /* White text */
+  padding: 10px 24px; /* Some padding */
+  cursor: pointer; /* Pointer/hand icon */
+  float: left; /* Float the buttons side by side */
+}
+
+/* Clear floats (clearfix hack) */
+.btn-group:after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+.btn-group button:not(:last-child) {
+  border-right: none; /* Prevent double borders */
+}
+
+/* Add a background color on hover */
+.btn-group button:hover {
+  background-color: #3e8e41;
+}
+
+</style>
+
+</html>

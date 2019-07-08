@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="utf-8">
+    <title></title>
+    <style type="text/css">
+        body {
+            font-family: sans-serif;
+        }
+        svg {
+            margin-left: auto;
+            margin-right: auto;
+            display: inline-block;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            -khtml-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+
+            cursor: default;
+        }
+        div.hGraph-container {
+            margin: 0;
+            padding: 0;
+            height: 98.45%;
+            width: 99.45%;
+            display: inline-block;
+            position: absolute;
+            vertical-align: middle;
+
+        }
+		div.credits {
+			position: absolute; 
+			font-size: 0.9em;
+			right: 1em;
+			bottom: 2em; 
+			color: grey; 
+		}
+		div.header {
+			position: absolute; 
+			display: block;
+			font-size: 1.5em;
+			font-weight: bold;
+			left: 0.5em; 
+			top: 0.9em;
+			color: #999; 
+			z-index: -99999;
+			text-shadow: 5px 5px 8px #ddd;
+			line-height: 0.8em;
+		}
+		div.header small {
+			font-weight: normal;
+			font-size: 70%;	
+			display: block;
+		}
+		div.credits img {
+			height: 1em;
+			vertical-align: -2px;
+		}
+		div.examples {
+			position: absolute;
+			font-size: 0.9em;
+			left: 1em;
+			bottom: 2em;
+			color: grey;
+		}
+    </style>
+</head>
+<body>
+
+<div class="hGraph-container"></div>
+<div class="header">Grocery shopping datasets <small>(2 sets)<small></div>
+<div class="credits">
+Based on <img src="http://gitlab.com/assets/logo-ca207549507c811d027110077cf86e90.svg">
+<a href="https://gitlab.com/ledancs/hFigures">hFigures</a> by Andres Ledesma
+</div>
+
+<script charset="utf-8" src="d3.js"></script>
+<script charset="utf-8" src="dataNutrition.js"></script>
+
+<script src="hFigures.js" type="application/javascript"></script>
+
+<script type="text/javascript">
+    var w = 1200;
+    var className = "hGraph-container";
+    var hFigureInstance = HealthFigure(groups, w, className, {
+        minScale: 0.5
+    }); // from data.js
+    var additionalFigure = hFigureInstance.plotAt(0);
+
+</script>
+
+<div class="examples">
+    Some other examples:
+    <list>
+        <li>
+            <a href="index.html">The introductory example</a>
+        </li>
+        <li>
+            <a href="simple.html">A simple dataset</a>
+        </li>
+        <li>
+            <a href="complex.html">A more complex dataset</a>
+        </li>
+    </list>
+</div>
+
+</body>
+</html>
