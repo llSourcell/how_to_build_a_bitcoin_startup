@@ -48,7 +48,7 @@
     "webpack-dev-middleware": "^3.4.0"
   },
   "dependencies": {
-    "axios": "^0.18.0",
+    "axios": "^0.21.1",
     "check-types": "^7.4.0",
     "is-url": "1.2.2",
     "node-fetch": "^2.3.0",
